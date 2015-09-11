@@ -45,7 +45,7 @@ exports.activeEmail = function (req, res, next) {
       return res.send('您的帐号已经是激活状态。');
     }
     var sepTime = new Date() - _user.meta.createAt;
-    if (sepTime > 1000 * 60 * 60 * 24) {
+    if (sepTime > config.failActiveTime) {
       return res.send('链接超时，请重新发起激活。');
     }
     userDao.update({email : email}, {isActive : 1}, {}, function (err) {

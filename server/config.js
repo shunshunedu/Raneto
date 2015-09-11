@@ -32,6 +32,7 @@ var config = {
   // Add your analytics tracking code (including script tags)
   analytics : '',
 
+  failActiveTime   : 1000 * 60 * 60 * 24 * 60,
   salt_factor      : 10,
   session_secret   : 'shunshun_doc',
   auth_cookie_name : 'shunshun',
