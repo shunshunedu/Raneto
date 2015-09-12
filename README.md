@@ -1,4 +1,4 @@
-# 顺顺faq
+# 顺顺faq [!travis-ci](https://travis-ci.org/shunshunedu/Raneto.svg?branch=master)
 基于  
 Raneto
 ======
