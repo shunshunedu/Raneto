@@ -46,3 +46,6 @@ desktop.ini
 *.sublime-project
 *.sublime-workspace
 *.swp
+
+.gitmodules
+server/config.js
