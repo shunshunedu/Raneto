@@ -1,3 +1,5 @@
+'use strict';
+
 var normal = require('../../tools/normal');
 var should = require('should');
 var userDao = require('../../server/user');

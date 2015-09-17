@@ -1,85 +1,115 @@
 module.exports = function (grunt) {
 
     grunt.initConfig({
-        pkg: grunt.file.readJSON('package.json'),
-        watch: {
-            html: {
-                files: ['views/**'],
-                options: {
-                    livereload: true
+        pkg   : grunt.file.readJSON('package.json'),
+        watch : {
+            html   : {
+                files   : ['views/**'],
+                options : {
+                    livereload : true
                 }
             },
-            js: {
-                files: ['public/scripts/raneto.js', 'models/*.js', 'service/*.js', 'tools/*.js'],
-                tasks: ['jshint'],
-                options: {
-                    livereload: true
+            js     : {
+                files   : ['public/scripts/raneto.js', 'models/*.js', 'service/*.js', 'tools/*.js'],
+                tasks   : ['jshint'],
+                options : {
+                    livereload : true
                 }
             },
-            uglify: {
-                files: ['public/scripts/raneto.js'],
-                tasks: ['jshint'],
-                options: {
-                    livereload: true
+            uglify : {
+                files   : ['public/scripts/raneto.js'],
+                tasks   : ['jshint'],
+                options : {
+                    livereload : true
                 }
             }
         },
 
-        jshint: {
-            options: {
-                jshintrc: '.jshintrc',
-                ignores: ['public/scripts/jquery.form.js']
+        jshint : {
+            options : {
+                jshintrc : '.jshintrc',
+                ignores  : ['public/scripts/jquery.form.js']
             },
-            all: ['public/scripts/*.js', 'server/**/*.js', 'bin/*.js', 'routers/*.js', 'models/*.js', 'tools/*.js']
+            all     : ['public/scripts/*.js', 'server/**/*.js', 'bin/*.js', 'routers/*.js', 'models/*.js', 'tools/*.js']
         },
 
-        concat: {
-            options: {
-                separator: ';'
+        csslint : {
+            options : {
+                csslintrc : '.csslintrc'
             },
-            dist: {
-                src: ['public/scripts/*.js'],
-                dest: 'public/build/<%= pkg.name %>.js'
+            strict  : {
+                options : {
+                    import : 2
+                },
+                src     : ['public/styles/*.css']
+            },
+            lax:{
+                options:{
+                    import:false
+                },
+                src:['public/styles/*.css']
             }
         },
 
-        uglify: {
-            options: {
-                banner: '/*! <%= pkg.name %> - v<%= pkg.version %> - ' +
+        concat  : {
+            options : {
+                separator : ';'
+            },
+            dist    : {
+                src  : ['public/scripts/*.js'],
+                dest : 'public/build/<%= pkg.name %>.js'
+            }
+        },
+
+        uglify : {
+            options   : {
+                banner : '/*! <%= pkg.name %> - v<%= pkg.version %> - ' +
                 '<%= grunt.template.today("yyyy-mm-dd") %> */'
             },
-            my_target: {
-                files: {
-                    'public/build/index.min.js': 'public/scripts/index.js',
-                    'public/build/all<%= Date.now() %>.min.js': [
+            my_target : {
+                files : {
+                    'public/build/index.min.js'                : 'public/scripts/index.js',
+                    'public/build/all<%= Date.now() %>.min.js' : [
                         'public/scripts/*.js'
                     ]
                 }
             }
         },
 
-        nodemon: {
-            dev: {
-                options: {
-                    file: 'app',
-                    args: [],
-                    ignoredFiles: ['README.md', 'node_modules/**', '.DS_Store'],
-                    watchedExtensions: ['js'],
-                    watchedFolders: ['./'],
-                    debug: true,
-                    delayTime: 1,
-                    env: {
-                        PORT: 3000
+        cssmin: {
+            target: {
+                files: [{
+                    expand: true,
+                    cwd: 'public/styles',
+                    src: ['*.css', '!*.min.css'],
+                    dest: 'public/release/css',
+                    ext: '.min.css'
+                }]
+            }
+        },
+
+        nodemon : {
+            dev : {
+                options : {
+                    file              : 'bin/www',
+                    args              : [],
+                    ignoredFiles      : ['README.md', 'node_modules/**', '.DS_Store'],
+                    watchedExtensions : ['js'],
+                    watchedFolders    : ['./'],
+                    debug             : true,
+                    delayTime         : 1,
+                    env               : {
+                        PORT : 3000
                     },
-                    cwd: __dirname
+                    cwd               : __dirname
                 }
             }
         },
 
-        concurrent: {
-            tasks: ['nodemon', 'watch', 'uglify', 'jshint'],
-            options: {
-                logConcurrentOutput: true
+        concurrent : {
+            tasks   : ['nodemon', 'watch', 'uglify', 'jshint'],
+            options : {
+                logConcurrentOutput : true
             }
         }
     });
@@ -90,6 +120,8 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.loadNpmTasks('grunt-contrib-concat');
+    grunt.loadNpmTasks('grunt-contrib-csslint');
+    grunt.loadNpmTasks('grunt-contrib-cssmin');
     grunt.option('force', true);
 
     grunt.registerTask('default', ['concurrent']);

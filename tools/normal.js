@@ -1,3 +1,4 @@
+'use strict';
 
 var bcrypt = require('bcrypt');
 var config = require('../server/config');

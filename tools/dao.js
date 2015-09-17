@@ -1,9 +1,11 @@
+'use strict';
+
 function CommonDao(model) {
-  if (!model) {
-    throw new Error('Model can not be null');
-  }
-  this.model = model;
-  this.extends = {};
+    if (!model) {
+        throw new Error('Model can not be null');
+    }
+    this.model   = model;
+    this.extends = {};
 }
 
 /**
@@ -12,10 +14,12 @@ function CommonDao(model) {
  * @param callback
  */
 CommonDao.prototype.create = function (doc, callback) {
-  this.model.create(doc, function (error) {
-    if (error) return callback(error);
-    return callback(null);
-  });
+    this.model.create(doc, function (error) {
+        if (error) {
+            return callback(error);
+        }
+        return callback(null);
+    });
 };
 
 /**
@@ -24,10 +28,12 @@ CommonDao.prototype.create = function (doc, callback) {
  * @param callback
  */
 CommonDao.prototype.getById = function (id, callback) {
-  this.model.findOne({_id: id}, function (error, model) {
-    if (error) return callback(error, null);
-    return callback(null, model);
-  });
+    this.model.findOne({_id : id}, function (error, model) {
+        if (error) {
+            return callback(error, null);
+        }
+        return callback(null, model);
+    });
 };
 
 /**
@@ -38,17 +44,21 @@ CommonDao.prototype.getById = function (id, callback) {
  * @param callback
  */
 CommonDao.prototype.getByQuery = function (query, fileds, opt, callback) {
-  this.model.find(query, fileds, opt, function (error, model) {
-    if (error) return callback(error, null);
-    return callback(null, model);
-  });
+    this.model.find(query, fileds, opt, function (error, model) {
+        if (error) {
+            return callback(error, null);
+        }
+        return callback(null, model);
+    });
 };
 
 CommonDao.prototype.getAll = function (callback) {
-  this.model.find({}, function (error, models) {
-    if (error) return callback(error, null);
-    return callback(null, models);
-  });
+    this.model.find({}, function (error, models) {
+        if (error) {
+            return callback(error, null);
+        }
+        return callback(null, models);
+    });
 };
 /*
  CommonDao.prototype.getAllModelByOption = function (opt, callback) {
@@ -57,10 +67,12 @@ CommonDao.prototype.getAll = function (callback) {
  */
 
 CommonDao.prototype.delete = function (query, callback) {
-  this.model.remove(query, function (error) {
-    if (error) return callback(error);
-    return callback(null);
-  });
+    this.model.remove(query, function (error) {
+        if (error) {
+            return callback(error);
+        }
+        return callback(null);
+    });
 };
 
 /**
@@ -71,10 +83,12 @@ CommonDao.prototype.delete = function (query, callback) {
  * @param callback
  */
 CommonDao.prototype.update = function (conditions, update, options, callback) {
-  this.model.update(conditions, update, options, function (error, model) {
-    if (error) return callback(error);
-    return callback(null, model);
-  });
+    this.model.update(conditions, update, options, function (error, model) {
+        if (error) {
+            return callback(error);
+        }
+        return callback(null, model);
+    });
 };
 
 module.exports = CommonDao;

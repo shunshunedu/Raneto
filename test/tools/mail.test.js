@@ -1,3 +1,5 @@
+'use strict';
+
 var mail = require('../../tools/mail');
 
 describe('test/tools/mail.test.js', function () {

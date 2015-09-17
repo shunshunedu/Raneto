@@ -1,3 +1,5 @@
+'use strict';
+
 var mailer = require('nodemailer');
 var config = require('../server/config');
 var log4js = require('./logger');

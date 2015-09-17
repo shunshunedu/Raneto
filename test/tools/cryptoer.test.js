@@ -1,3 +1,5 @@
+'use strict';
+
 var cryptoer = require('../../tools/cryptoer');
 var should = require('should');
 
