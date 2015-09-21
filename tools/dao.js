@@ -1,3 +1,5 @@
+'use strict';
+
 function CommonDao(model) {
   if (!model) {
     throw new Error('Model can not be null');

@@ -1,3 +1,4 @@
+/*global hljs*/
 (function ($, hljs) {
 
   'use strict';
