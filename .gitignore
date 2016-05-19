@@ -48,3 +48,6 @@ desktop.ini
 *.sublime-project
 *.sublime-workspace
 *.swp
+
+*-compiled.js
+*-compiled.js.map
