@@ -53,3 +53,5 @@ desktop.ini
 server/config.js
 public/build
 public/release
+*-compiled.js
+*-compiled.js.map
